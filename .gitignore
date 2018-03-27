@@ -4,8 +4,6 @@ build/
 .settings/
 .vscode/
 gradle/
-gradlew
-gradlew.bat
 .gradle
 .project
 out/
