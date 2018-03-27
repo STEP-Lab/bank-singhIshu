@@ -23,4 +23,9 @@ public class Account {
         validateMinimumBalance(this.balance - amount, "Requested withdrawal will cause Insufficient Balance");
         this.balance -= amount;
     }
+
+
+    public void credit(int amount) {
+        this.balance += amount;
+    }
 }

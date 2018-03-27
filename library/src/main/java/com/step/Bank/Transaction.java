@@ -24,12 +24,17 @@ public abstract class Transaction {
         if (o == null || getClass() != o.getClass()) return false;
         Transaction that = (Transaction) o;
         return Float.compare(that.amount, amount) == 0 &&
-                Objects.equals(to, that.to);
+                Objects.equals(to, that.to) &&
+                Objects.equals(date.toString(), that.date.toString());
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(amount, to);
+        return Objects.hash(amount, to, date.toString());
+    }
+
+    public float getAmount() {
+        return amount;
     }
 }

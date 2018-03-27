@@ -1,7 +1,10 @@
 package com.step.Bank;
 
 public class AccountNumber {
+    private String number;
+
     public AccountNumber(String number) throws InvalidAccountNumber {
+        this.number = number;
         validateAccountNumber(number);
     }
     private void validateAccountNumber(String accountNumber) throws InvalidAccountNumber {
