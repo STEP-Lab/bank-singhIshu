@@ -7,4 +7,5 @@ gradle/
 .gradle
 .project
 out/
-.csv
+*.csv
+*.txt
