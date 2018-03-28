@@ -93,4 +93,24 @@ public class TransactionsTest {
         Transactions transaction = transactions.filterAllDebitTransactions();
         assertThat(transaction.list,hasItems(debit1,debit2));
     }
+
+    @Test
+    public void printAllTheTransactionsInCSVFile() throws IOException {
+        ArrayList<String> result = new ArrayList<>();
+        transactions.credit(15000,"Ashish");
+        String headers = "Date,Amount,To";
+        Transaction creditToKetan = new CreditTransaction(15000,"Ashish");
+        FileWriter fileWriter = new FileWriter("file.csv") {
+            @Override
+            public Writer append(CharSequence csq) {
+                result.add(String.valueOf(csq));
+                return this;
+            }
+        };
+        CSVPrinter csvPrinter = new CSVPrinter(fileWriter,headers);
+        csvPrinter.writeHeaders();
+        transactions.writeTransactionsInCSV(csvPrinter);
+        csvPrinter.close();
+        assertThat(result,hasItems(String.valueOf(creditToKetan.getDate()),String.valueOf(creditToKetan.getAmount()), creditToKetan.getReciever()));
+    }
 }

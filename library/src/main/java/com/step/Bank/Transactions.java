@@ -1,7 +1,10 @@
 package com.step.Bank;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class Transactions {
@@ -27,9 +30,35 @@ public class Transactions {
         return transactions;
     }
 
-//    public void print(Writer writer){
-//        for (Transaction transaction:list){
-//            writer.println(transaction.toString());
-//        }
-//    }
+    public void print(PrintWriter writer){
+        for (Transaction transaction:list){
+            writer.println(transaction.toString());
+        }
+    }
+
+    public Transactions filterAllCreditTransactions() {
+        Transactions transactions = new Transactions();
+        for (Transaction transaction : list){
+            if (transaction instanceof CreditTransaction){
+                transactions.list.add(transaction);
+            }
+        }
+        return transactions;
+    }
+
+    public Transactions filterAllDebitTransactions() {
+        Transactions transactions = new Transactions();
+        for (Transaction transaction : list){
+            if (transaction instanceof DebitTransaction){
+                transactions.list.add(transaction);
+            }
+        }
+        return transactions;
+    }
+
+    public void writeTransactionsInCSV(CSVPrinter CSVPrinter) throws IOException {
+        for (Transaction transaction : list){
+            CSVPrinter.writeTransactions(transaction);
+        }
+    }
 }
